@@ -1,24 +1,4 @@
-import time
-import pyupbit
-import datetime
-import requests
 
-access = "HOjx73D2hAPLBsYYOTfmz8CHoY6EHwsgDqILn0UD"
-secret = "ToFm4Etvg6H2xvz6vDNNCoNh6LPXcPHQXI94qpjL"
-myToken = "xoxb-6856149358212-6876479524016-kR4zIEfXBxpEzavxhMpyl1xK"
-
-def post_message(token, channel, text):
-    """슬랙 메시지 전송"""
-    response = requests.post("https://slack.com/api/chat.postMessage",
-        headers={"Authorization": "Bearer "+token},
-        data={"channel": channel,"text": text}
-    )
-
-def get_target_price(ticker, k):
-    """변동성 돌파 전략으로 매수 목표가 조회"""
-    df = pyupbit.get_ohlcv(ticker, interval="day", count=2)
-    target_price = df.iloc[0]['close'] + (df.iloc[0]['high'] - df.iloc[0]['low']) * k
-    return target_price
 
 def get_start_time(ticker):
     """시작 시간 조회"""
